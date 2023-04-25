@@ -43,6 +43,8 @@ exports.login = async (req, res) => {
         accessToken: token,
         user: user,
       });
+    } else{
+      throw new Error("Invalid password");
     }
   } catch (err) {
     res.status(500).json({

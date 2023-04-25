@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: Api des essences de bois
+  description: Une API pour gérer les données relatives aux essences de bois.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api
+paths:
+  /auth/signup:
+    get:
+      summary: Inscription
+      description: Créer un compte sur l'API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Inscription réussie
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 5
+                  email:
+                    type: string
+                    format: email
+                    example: john@doe.com
+                  password:
+                    type: string
+                    example: "$2b$10$0W2.Zf4w6q3CVeptjetyr.BMAcUONS3cV0sc2uVG0r616fG/XZG7K"
+                  firstName:
+                    type: string
+                    example: John
+                  lastName:
+                    type: string
+                    example: Doe
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    example: "2023-04-25T13:35:14.519Z"
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: "2023-04-25T"
+        '500':
+          description: Champs manquant
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "notNull Violation: firstName is required"
+  /auth/login:
+    post:
+      summary: Authenticate to API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '404':
+          description: Invalid Password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "User not found"
+        '500':
+          description: Invalid Password
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid password"
+        '400':
+          description: Requête invalide

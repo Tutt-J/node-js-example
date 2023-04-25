@@ -1,16 +1,16 @@
-require('dotenv').config()
+require("dotenv").config();
 const app = require("./app.js");
-var cors = require('cors')
+var cors = require("cors");
 
-const port = process.env.PORT
+const port = process.env.PORT;
 
 var corsOptions = {
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200 
-}
+  origin: "http://localhost:8080",
+  optionsSuccessStatus: 200,
+};
 
-app.use(cors())
+app.use(cors());
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});

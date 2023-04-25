@@ -7,8 +7,9 @@ exports.signup = async (req, res) => {
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
     req.body.email = await encrypt(req.body.email);
-    console.log(req.body.email);
+
     const user = await User.create(req.body);
+    
     user.email = await decrypt(user.email);
     res.status(201).json(user);
   } catch (err) {

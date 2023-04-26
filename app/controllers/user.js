@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
     res.status(201).json(user);
   } catch (err) {
     return res.status(500).json({
-      message: err.message || "Some error occurred while creating user.",
+      error: err.message || "Some error occurred while creating user.",
     });
   }
 };
@@ -48,7 +48,7 @@ exports.login = async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({
-      message:
+      error:
         err.message ||
         `Some error occurred while retrieving user with email "${req.body.email}"`,
     });

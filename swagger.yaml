@@ -241,12 +241,26 @@ paths:
                   image:
                     type: string
                     description: The URL of an image of the wood.
-                  hardnessId:
-                    type: integer
+                  hardness:
                     description: The unique identifier of the hardness of the wood.
-                  typeId:
-                    type: integer
+                    type: object
+                    properties:
+                      id: 
+                        type: string
+                        example: 1
+                      name:
+                        type: string
+                        example: "hard"
+                  type:
                     description: The unique identifier of the type of the wood.
+                    type: object
+                    properties:
+                      id: 
+                        type: string
+                        example: 1
+                      name:
+                        type: string
+                        example: "softwood"
                   createdAt:
                     type: string
                     format: date-time
@@ -259,29 +273,24 @@ paths:
                   - id: 1
                     name: Épicéa
                     image: null
-                    hardnessId: 1
-                    typeId: 1
+                    hardness:
+                      id: 1
+                      name: "tender"
+                    type: 
+                      id: 1
+                      name: "softwood"
                     createdAt: null
                     updatedAt: null
                   - id: 2
                     name: Pin
                     image: null
-                    hardnessId: 2
-                    typeId: 1
-                    createdAt: null
-                    updatedAt: null
-                  - id: 3
-                    name: Padouk
-                    image: null
-                    hardnessId: 3
-                    typeId: 2
-                    createdAt: null
-                    updatedAt: null
-                  - id: 4
-                    name: Érable
-                    image: null
-                    hardnessId: 2
-                    typeId: 3
+                    hardness:
+                      id: 2
+                      name: "medium-hard"
+                    type:
+                      id: 3
+                      name: "noble and hardwoods" 
+                    
                     createdAt: null
                     updatedAt: null
         '500':
@@ -330,18 +339,26 @@ paths:
                     format: date-time
                     description: The date and time when the wood was last updated.
                 example:
-                  - id: 1
-                    name: Épicéa
+                  - id: 2
+                    name: Pin
                     image: null
-                    hardnessId: 1
-                    typeId: 1
+                    hardness:
+                      id: 2
+                      name: "medium-hard"
+                    type: 
+                      id: 1
+                      name: "softwood"
                     createdAt: null
                     updatedAt: null
-                  - id: 7
-                    name: Douglas
+                  - id: 4
+                    name: Érable
                     image: null
-                    hardnessId: 1
-                    typeId: 1
+                    hardness:
+                      id: 2
+                      name: "medium-hard"
+                    type: 
+                      id: 3
+                      name: "noble and hardwoods"
                     createdAt: null
                     updatedAt: null
         '500':

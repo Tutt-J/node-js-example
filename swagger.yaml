@@ -67,7 +67,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error:
                     type: string
                     example: "notNull Violation: firstName is required"
   /auth/login:
@@ -141,7 +141,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error:
                     type: string
                     example: "Invalid password"
   /woods:
@@ -218,7 +218,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error:
                     type: string
                     example: "Some error occurred while creating wood."
     get:
@@ -300,13 +300,147 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error:
                     type: string
                     example: "Some error occurred while retrieving woods."
-  /woods/{hardness}:
+  /woods/{id}:
+    put:
+      summary: Update Wood
+      description: Update an existing wood
+      parameters:
+        - name: id
+          in: path
+          description: ID of wood
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                datas:
+                  type: object
+                  description: Data request
+                  properties:
+                    name:
+                      type: string
+                      example: "Cèdre"
+                    hardnessId:
+                      type: integer
+                      example: 12
+                    typeId:
+                      type: integer
+                      example: 41
+                image:
+                  type: file
+                  description: Image to upload
+                  example: <file>
+              required:
+                - datas
+      responses:
+        '200':
+          description: Successful update
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: The unique identifier of the wood.
+                    example: 12
+                  name:
+                    type: string
+                    description: The name of the wood.
+                    example: Cèdre
+                  image:
+                    type: file
+                    description: The URL of an image of the wood.
+                    example: http://localhost:5000/images/Sans_titre_1682499913743.jpg
+                  hardnessId:
+                    type: integer
+                    description: The unique identifier of the hardness of the wood.
+                    example: 12
+                  typeId:
+                    type: integer
+                    description: The unique identifier of the type of the wood.
+                    example: 41
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was created.
+                    example: 2023-04-26T09:05:13.746Z
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was last updated.
+                    example: 2023-04-26T09:05:13.746Z
+        '404':
+          description: Wood doesn't exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Wood not found"
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Some error occurred while updating wood."
+    delete:
+      summary: Delete Wood
+      description: Delete an existing wood
+      parameters:
+        - name: hardnessId
+          in: path
+          description: ID of hardness
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Successful delete
+        '404':
+          description: Wood doesn't exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Wood not found"
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Some error occurred while deleting wood."
+  /woods/{hardnessId}:
     get:
       summary: Get all woods by hardness
       description: Get all woods by hardness
+      parameters:
+        - name: hardnessId
+          in: path
+          description: ID of hardness
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: Successful
@@ -368,7 +502,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error:
                     type: string
                     example: "Some error occurred while retrieving woods."
     

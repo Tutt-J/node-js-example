@@ -20,7 +20,7 @@ exports.readAll = async (req, res) => {
     res.status(200).json(woods);
   } catch (err) {
     res.status(500).json({
-      message: err.message || "Some error occurred while retrieving woods.",
+      error: err.message || "Some error occurred while retrieving woods.",
     });
   }
 };
@@ -48,7 +48,7 @@ exports.readByHardness = async (req, res) => {
     res.status(200).json(woods);
   } catch (err) {
     res.status(500).json({
-      message: err.message || "Some error occurred while retrieving woods.",
+      error: err.message || "Some error occurred while retrieving woods.",
     });
   }
 };
@@ -68,7 +68,7 @@ exports.create = async (req, res) => {
     res.status(201).json(wood);
   } catch (err) {
     return res.status(500).json({
-      message: err.message || "Some error occurred while creating wood.",
+      error: err.message || "Some error occurred while creating wood.",
     });
   }
 };
@@ -77,7 +77,7 @@ exports.update = async (req, res) => {
   try {
     const wood = await Wood.findByPk(req.params.id);
     if (!wood) {
-      return res.status(404).send("Wood not found");
+      return res.status(404).json({"error":"Wood not found"});
     }
     let newWood = {
       ...JSON.parse(req.body.datas),
@@ -101,7 +101,7 @@ exports.update = async (req, res) => {
     res.status(200).json(wood);
   } catch (err) {
     return res.status(500).json({
-      message: err.message || "Some error occurred while creating wood.",
+      error: err.message || "Some error occurred while updating wood.",
     });
   }
 };
@@ -109,6 +109,9 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const wood = await Wood.findByPk(req.params.id);
+    if (!wood) {
+      return res.status(404).json({"error":"Wood not found"});
+    }
     if (wood.image) {
       await remove(wood.image);
     }
@@ -116,7 +119,7 @@ exports.delete = async (req, res) => {
     res.status(204).send();
   } catch (err) {
     return res.status(500).json({
-      message: err.message || "Some error occurred while creating wood.",
+      error: err.message || "Some error occurred while deleting wood.",
     });
   }
 };

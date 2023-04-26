@@ -12,7 +12,7 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false,
     });
-    
+
     await queryInterface.addConstraint("Woods", {
       fields: ["typeId"],
       type: "foreign key",
@@ -38,10 +38,23 @@ module.exports = {
     });
     await queryInterface.removeColumn("Woods", "type");
     await queryInterface.removeColumn("Woods", "hardness");
-
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Woods");
+    await queryInterface.addColumn("Woods", "type", {
+      type: Sequelize.ENUM,
+      values: ["softwood", "exotic wood", "noble and hardwoods"],
+    });
+
+    await queryInterface.addColumn("Woods", "hardness", {
+      type: Sequelize.ENUM,
+      values: ["tender", "medium-hard", "hard"],
+    });
+
+    await queryInterface.removeConstraint("Woods", "fk_wood_type");
+    await queryInterface.removeColumn("Woods", "typeId");
+
+    await queryInterface.removeConstraint("Woods", "fk_wood_hardness");
+    await queryInterface.removeColumn("Woods", "hardnessId");
   },
 };

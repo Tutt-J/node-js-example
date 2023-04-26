@@ -1,19 +1,21 @@
 const { Wood, Type, Hardness } = require("../models");
-
+const { remove } = require("../helpers/image.js");
 exports.readAll = async (req, res) => {
   try {
-    const woods = await Wood.findAll({ 
-      attributes: { exclude: ['hardnessId','typeId'] },
-      include: [{
-        model: Type, 
-        as: "type",
-        attributes: ['id', 'name']
-      },
-      {
-        model: Hardness, 
-        as: "hardness",
-        attributes: ['id', 'name']
-      }]
+    const woods = await Wood.findAll({
+      attributes: { exclude: ["hardnessId", "typeId"] },
+      include: [
+        {
+          model: Type,
+          as: "type",
+          attributes: ["id", "name"],
+        },
+        {
+          model: Hardness,
+          as: "hardness",
+          attributes: ["id", "name"],
+        },
+      ],
     });
     res.status(200).json(woods);
   } catch (err) {
@@ -29,17 +31,19 @@ exports.readByHardness = async (req, res) => {
       where: {
         hardnessId: req.params.hardnessId,
       },
-      attributes: { exclude: ['hardnessId','typeId'] },
-      include: [{
-        model: Type, 
-        as: "type",
-        attributes: ['id', 'name']
-      },
-      {
-        model: Hardness, 
-        as: "hardness",
-        attributes: ['id', 'name']
-      }]
+      attributes: { exclude: ["hardnessId", "typeId"] },
+      include: [
+        {
+          model: Type,
+          as: "type",
+          attributes: ["id", "name"],
+        },
+        {
+          model: Hardness,
+          as: "hardness",
+          attributes: ["id", "name"],
+        },
+      ],
     });
     res.status(200).json(woods);
   } catch (err) {
@@ -51,12 +55,65 @@ exports.readByHardness = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const pathname = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+    let pathname = null;
+    if (req.file) {
+      pathname = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`;
+    }
     const wood = await Wood.create({
       ...JSON.parse(req.body.datas),
       image: pathname,
     });
     res.status(201).json(wood);
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message || "Some error occurred while creating wood.",
+    });
+  }
+};
+
+exports.update = async (req, res) => {
+  try {
+    const wood = await Wood.findByPk(req.params.id);
+    if (!wood) {
+      return res.status(404).send("Wood not found");
+    }
+    let newWood = {
+      ...JSON.parse(req.body.datas),
+    };
+
+    if (req.file) {
+      const pathname = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`;
+      newWood = {
+        ...newWood,
+        image: pathname,
+      };
+      if (wood.image) {
+        await remove(wood.image);
+      }
+    }
+
+    await wood.update(newWood);
+
+    res.status(200).json(wood);
+  } catch (err) {
+    return res.status(500).json({
+      message: err.message || "Some error occurred while creating wood.",
+    });
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    const wood = await Wood.findByPk(req.params.id);
+    if (wood.image) {
+      await remove(wood.image);
+    }
+    await wood.destroy();
+    res.status(204).send();
   } catch (err) {
     return res.status(500).json({
       message: err.message || "Some error occurred while creating wood.",

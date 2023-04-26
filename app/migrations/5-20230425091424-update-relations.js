@@ -38,7 +38,6 @@ module.exports = {
     });
     await queryInterface.removeColumn("Woods", "type");
     await queryInterface.removeColumn("Woods", "hardness");
-
   },
 
   async down(queryInterface, Sequelize) {

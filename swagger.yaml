@@ -8,8 +8,8 @@ servers:
 paths:
   /auth/signup:
     get:
-      summary: Inscription
-      description: Créer un compte sur l'API
+      summary: Registration
+      description: Create an account on API
       requestBody:
         content:
           application/json:
@@ -18,15 +18,19 @@ paths:
               properties:
                 firstName:
                   type: string
+                  example: "Jane"
                 lastName:
                   type: string
+                  example: "Doe"
                 email:
                   type: string
+                  example: "jane@doe.com"
                 password:
                   type: string
+                  example: "azerty"
       responses:
-        '200':
-          description: Inscription réussie
+        '201':
+          description: Register successful
           content:
             application/json:
               schema:
@@ -57,7 +61,7 @@ paths:
                     format: date-time
                     example: "2023-04-25T"
         '500':
-          description: Champs manquant
+          description: Missing some field
           content:
             application/json:
               schema:
@@ -68,7 +72,8 @@ paths:
                     example: "notNull Violation: firstName is required"
   /auth/login:
     post:
-      summary: Authenticate to API
+      summary: Login
+      description: Authenticate to API
       requestBody:
         content:
           application/json:
@@ -77,11 +82,50 @@ paths:
               properties:
                 email:
                   type: string
+                  example: "jane@doe.com"
                 password:
                   type: string
+                  example: "azerty"
       responses:
+        '200':
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken: 
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjgyNDk1NTYwLCJleHAiOjE2ODI0OTkxNjB9.Xv-OwcI6jThpBQmO5uCPIMRpQw8Xre-1ntjRerEKavQ
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5
+                      email:
+                        type: string
+                        format: email
+                        example: john@doe.com
+                      password:
+                        type: string
+                        example: "$2b$10$0W2.Zf4w6q3CVeptjetyr.BMAcUONS3cV0sc2uVG0r616fG/XZG7K"
+                      firstName:
+                        type: string
+                        example: John
+                      lastName:
+                        type: string
+                        example: Doe
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        example: "2023-04-25T13:35:14.519Z"
+                      createdAt:
+                        type: string
+                        format: date-time
+                        example: "2023-04-25T"
         '404':
-          description: Invalid Password
+          description: Account doesn't exists
           content:
             application/json:
               schema:
@@ -100,5 +144,214 @@ paths:
                   message:
                     type: string
                     example: "Invalid password"
-        '400':
-          description: Requête invalide
+  /woods:
+    post:
+      summary: Create Wood
+      description: Create a new wood
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                datas:
+                  type: object
+                  description: Data request
+                  properties:
+                    name:
+                      type: string
+                      example: "Cèdre"
+                    hardnessId:
+                      type: integer
+                      example: 12
+                    typeId:
+                      type: integer
+                      example: 41
+                image:
+                  type: file
+                  description: Image to upload
+                  example: <file>
+              required:
+                - datas
+      responses:
+        '201':
+          description: Successful creation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: The unique identifier of the wood.
+                    example: 12
+                  name:
+                    type: string
+                    description: The name of the wood.
+                    example: Cèdre
+                  image:
+                    type: file
+                    description: The URL of an image of the wood.
+                    example: http://localhost:5000/images/Sans_titre_1682499913743.jpg
+                  hardnessId:
+                    type: integer
+                    description: The unique identifier of the hardness of the wood.
+                    example: 12
+                  typeId:
+                    type: integer
+                    description: The unique identifier of the type of the wood.
+                    example: 41
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was created.
+                    example: 2023-04-26T09:05:13.746Z
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was last updated.
+                    example: 2023-04-26T09:05:13.746Z
+        '500':
+          description: Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Some error occurred while creating wood."
+    get:
+      summary: Get all woods
+      description: Get all woods
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  id:
+                    type: integer
+                    description: The unique identifier of the wood.
+                  name:
+                    type: string
+                    description: The name of the wood.
+                  image:
+                    type: string
+                    description: The URL of an image of the wood.
+                  hardnessId:
+                    type: integer
+                    description: The unique identifier of the hardness of the wood.
+                  typeId:
+                    type: integer
+                    description: The unique identifier of the type of the wood.
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was created.
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was last updated.
+                example:
+                  - id: 1
+                    name: Épicéa
+                    image: null
+                    hardnessId: 1
+                    typeId: 1
+                    createdAt: null
+                    updatedAt: null
+                  - id: 2
+                    name: Pin
+                    image: null
+                    hardnessId: 2
+                    typeId: 1
+                    createdAt: null
+                    updatedAt: null
+                  - id: 3
+                    name: Padouk
+                    image: null
+                    hardnessId: 3
+                    typeId: 2
+                    createdAt: null
+                    updatedAt: null
+                  - id: 4
+                    name: Érable
+                    image: null
+                    hardnessId: 2
+                    typeId: 3
+                    createdAt: null
+                    updatedAt: null
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Some error occurred while retrieving woods."
+  /woods/{hardness}:
+    get:
+      summary: Get all woods by hardness
+      description: Get all woods by hardness
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  id:
+                    type: integer
+                    description: The unique identifier of the wood.
+                  name:
+                    type: string
+                    description: The name of the wood.
+                  image:
+                    type: string
+                    description: The URL of an image of the wood.
+                  hardnessId:
+                    type: integer
+                    description: The unique identifier of the hardness of the wood.
+                  typeId:
+                    type: integer
+                    description: The unique identifier of the type of the wood.
+                  createdAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was created.
+                  updatedAt:
+                    type: string
+                    format: date-time
+                    description: The date and time when the wood was last updated.
+                example:
+                  - id: 1
+                    name: Épicéa
+                    image: null
+                    hardnessId: 1
+                    typeId: 1
+                    createdAt: null
+                    updatedAt: null
+                  - id: 7
+                    name: Douglas
+                    image: null
+                    hardnessId: 1
+                    typeId: 1
+                    createdAt: null
+                    updatedAt: null
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Some error occurred while retrieving woods."
+    

@@ -19,7 +19,7 @@ module.exports = {
       type: "foreign key",
       name: "fk_wood_type",
       references: {
-        table: "types",
+        table: "Types",
         field: "id",
       },
       onDelete: "cascade",

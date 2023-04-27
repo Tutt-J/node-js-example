@@ -1,0 +1,7 @@
+{
+    "name": "my-project",
+    "buildCommand": "npm run build",
+    "startCommand": "npm start",
+    "deployCommand": "npm install && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+  }
+  

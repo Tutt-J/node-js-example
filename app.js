@@ -6,6 +6,9 @@ const swaggerUi = require('swagger-ui-express');
 YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 const path = require('path');
+var hateoasLinker = require('express-hateoas-links');
+
+app.use(hateoasLinker);
 
 db.sequelize
   .authenticate()

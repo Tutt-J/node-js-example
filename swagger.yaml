@@ -7,7 +7,9 @@ servers:
   - url: http://localhost:5000/api
 paths:
   /auth/signup:
-    get:
+    post:
+      tags:
+        - Auth
       summary: Registration
       description: Create an account on API
       requestBody:
@@ -72,6 +74,8 @@ paths:
                     example: "notNull Violation: firstName is required"
   /auth/login:
     post:
+      tags:
+        - Auth
       summary: Login
       description: Authenticate to API
       requestBody:
@@ -146,6 +150,8 @@ paths:
                     example: "Invalid password"
   /woods:
     post:
+      tags:
+        - Woods
       summary: Create Wood
       description: Create a new wood
       requestBody:
@@ -222,6 +228,8 @@ paths:
                     type: string
                     example: "Some error occurred while creating wood."
     get:
+      tags:
+        - Woods
       summary: Get all woods
       description: Get all woods
       responses:
@@ -305,6 +313,8 @@ paths:
                     example: "Some error occurred while retrieving woods."
   /woods/{id}:
     put:
+      tags:
+        - Woods
       summary: Update Wood
       description: Update an existing wood
       parameters:
@@ -398,6 +408,8 @@ paths:
                     type: string
                     example: "Some error occurred while updating wood."
     delete:
+      tags:
+        - Woods
       summary: Delete Wood
       description: Delete an existing wood
       parameters:
@@ -432,6 +444,8 @@ paths:
                     example: "Some error occurred while deleting wood."
   /woods/{hardnessId}:
     get:
+      tags:
+        - Woods
       summary: Get all woods by hardness
       description: Get all woods by hardness
       parameters:

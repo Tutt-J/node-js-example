@@ -29,4 +29,4 @@ const storage = multer.diskStorage({
 
 // On exporte le module avec ces paramètres en précisant
 // qu'on attend un champ "image"
-module.exports = multer({storage: storage}).single("image");
+module.exports = multer({storage: storage});

@@ -14,7 +14,7 @@ const s3 = new S3Client({
 
 const s3Storage = multerS3({
   s3: s3, // s3 instance
-  bucket: process.env.AWS_S3_BUCKET_NAME, // change it as per your project requirement
+  bucket: process.env.CYCLIC_BUCKET_NAME, // change it as per your project requirement
   acl: "public-read", // storage access type
   metadata: (req, file, cb) => {
     cb(null, { fieldname: file.fieldname });

@@ -5,7 +5,6 @@ async function encrypt(string) {
     string,
     CryptoJS.enc.Base64.parse(process.env.CRYPTO_KEY),
     {
-      iv: CryptoJS.enc.Base64.parse(process.env.CRYPTO_IV),
       mode: CryptoJS.mode.ECB,
       padding: CryptoJS.pad.Pkcs7,
     }
@@ -17,7 +16,6 @@ async function decrypt(string) {
     string,
     CryptoJS.enc.Base64.parse(process.env.CRYPTO_KEY),
     {
-      iv: CryptoJS.enc.Base64.parse(process.env.CRYPTO_IV),
       mode: CryptoJS.mode.ECB,
       padding: CryptoJS.pad.Pkcs7,
     }

@@ -24,6 +24,6 @@ app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api-docs", swaggerUi.serve);
 app.get("/api-docs", swaggerUi.setup(swaggerDocument));
-app.use("/api", pinoHttp({ logger }), router);
+app.use("/api", /*pinoHttp({ logger }),*/ router);
 
 module.exports = app;

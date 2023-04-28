@@ -7,10 +7,10 @@ YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
 const path = require("path");
 var hateoasLinker = require("express-hateoas-links");
-const pinoHttp = require("pino-http");
-const {logger} = require("./app/helpers/logger.js")
+// const pinoHttp = require("pino-http");
+// const {logger} = require("./app/helpers/logger.js")
 
-app.use(pinoHttp({ logger }));
+// app.use(pinoHttp({ logger }));
 
 app.use(hateoasLinker);
 

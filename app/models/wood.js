@@ -26,6 +26,16 @@ module.exports = (sequelize, DataTypes) => {
       image: {
         type:DataTypes.STRING,
         allowNull: true,
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        timestamps: true
       }
     },
     {

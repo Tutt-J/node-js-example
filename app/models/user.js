@@ -42,6 +42,16 @@ module.exports = (sequelize, DataTypes) => {
           notNull: { msg: "password is required" },
         },
       },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        timestamps: true
+      }
     },
     {
       sequelize,

@@ -8,12 +8,18 @@ module.exports = {
       [
         {
           name: "tender",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "medium-hard",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "hard",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
       ],
       {}

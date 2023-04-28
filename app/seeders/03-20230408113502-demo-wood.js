@@ -17,17 +17,23 @@ module.exports = {
         {
           name: "Épicéa",
           typeId: softwood.id,
-          hardnessId: tender.id,
+          hardnessId: tender.id, 
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "Pin",
           typeId: softwood.id,
           hardnessId: mediumHard.id,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "Padouk",
           typeId: exoticWood.id,
           hardnessId: hard.id,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "Érable",
@@ -38,16 +44,22 @@ module.exports = {
           name: "Hêtre",
           typeId: nobleAndHard.id,
           hardnessId: mediumHard.id,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "Itauba",
           typeId: exoticWood.id,
           hardnessId: hard.id,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "Douglas",
           typeId: softwood.id,
           hardnessId: tender.id,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {

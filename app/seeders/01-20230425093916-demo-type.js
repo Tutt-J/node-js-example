@@ -8,12 +8,18 @@ module.exports = {
       [
         {
           name: "softwood",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "exotic wood",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "noble and hardwoods",
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
       ],
       {}

@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
     user.email = await decrypt(user.email);
     res.status(201).json(user);
   } catch (err) {
-    logger.error(err)
+    // logger.error(err)
     return res.status(500).json({
       error: err.message || "Some error occurred while creating user.",
     });
@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
       const err= {
         error: "User not found",
       }
-      logger.error(err)
+      // logger.error(err)
 
       return res.status(404).json(err);
     }
@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
       throw new Error("Invalid password");
     }
   } catch (err) {
-    logger.error(err)
+    // logger.error(err)
     res.status(500).json({
       error:
         err.message ||

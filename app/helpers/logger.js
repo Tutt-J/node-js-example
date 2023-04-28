@@ -22,7 +22,6 @@ const logger = pino(
       },
     },
     timestamp: pino.stdTimeFunctions.isoTime, // Format de la date et de l'heure dans les logs
-    base: null, // Ne pas inclure de propriétés supplémentaires dans chaque log
   },
   fileStream
 );

@@ -132,7 +132,6 @@ exports.update = async (req, res) => {
 
     res.status(200).json(wood);
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       error: err.message || "Some error occurred while updating wood.",
     });

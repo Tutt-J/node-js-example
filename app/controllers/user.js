@@ -2,7 +2,7 @@ const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { encrypt, decrypt } = require("../helpers/crypto.js");
-const {logger} = require("../helpers/logger.js")
+// const {logger} = require("../helpers/logger.js")
 
 exports.signup = async (req, res) => {
   try {

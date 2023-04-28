@@ -8,6 +8,8 @@
 # Logs
 logs
 *.log
+!logs/.gitkeep
+!/logs/.gitkeep
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

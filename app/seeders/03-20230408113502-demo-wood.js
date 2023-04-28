@@ -39,6 +39,8 @@ module.exports = {
           name: "Érable",
           typeId: nobleAndHard.id,
           hardnessId: mediumHard.id,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "Hêtre",

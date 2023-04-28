@@ -17,7 +17,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Type.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
+    createdAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+      allowNull: false,
+      type: DataTypes.DATE,
+      timestamps: true
+    }
   }, {
     sequelize,
     modelName: 'Type',

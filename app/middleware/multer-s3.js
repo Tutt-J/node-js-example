@@ -12,8 +12,6 @@ const s3 = new S3Client({
   region: process.env.AWS_REGION, // this is the region that you select in AWS account
 });
 
-console.log(process.env);
-
 const s3Storage = multerS3({
   s3: s3, // s3 instance
   bucket: process.env.CYCLIC_BUCKET_NAME, // change it as per your project requirement

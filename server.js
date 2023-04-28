@@ -2,6 +2,7 @@ require("dotenv").config();
 const app = require("./app.js");
 var cors = require("cors");
 const {limiter, speedLimiter} = require('./app/helpers/limiters.js')
+const helmet = require("helmet");
 const port = process.env.PORT;
 
 var corsOptions = {
@@ -9,6 +10,7 @@ var corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+app.use(helmet());
 app.use(cors(corsOptions));
 
 app.use(limiter)

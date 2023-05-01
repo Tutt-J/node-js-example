@@ -30,7 +30,7 @@
     "pino": "^8.11.0",
     "pino-http": "^8.3.3",
     "pino-pretty": "^10.0.0",
-    "sequelize": "^6.30.0",
+    "sequelize": "^6.31.0",
     "swagger-ui-express": "^4.6.2",
     "yamljs": "^0.3.0"
   },
